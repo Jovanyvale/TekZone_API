@@ -20,6 +20,9 @@ connectDB()
 
 const server = express()
 
+//Read data
+server.use(express.json())
+
 server.use('/api/products', router)
 
 
