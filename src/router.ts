@@ -1,15 +1,15 @@
 import { Router } from "express";
 const router = Router()
-import { createProduct } from "./handlers/createProduct";
+import { createProduct, getProducts } from "./handlers/product";
 import { body } from "express-validator";
+import { handleInputErros } from "./middleware";
 
 //Routing 
-router.get('/', (req, res) => {
-    res.json(`Hola mundo en express`)
-})
+router.get('/', getProducts)
 
 router.post('/', body('name').notEmpty().withMessage('Name field can not be empty'),
     body('price').isNumeric().notEmpty().withMessage('Price field can not be empty'),
+    handleInputErros,
     createProduct)
 
 router.patch('/', (req, res) => {
@@ -17,7 +17,7 @@ router.patch('/', (req, res) => {
 })
 
 router.delete('/', (req, res) => {
-    res.json(`Deletye`)
+    res.json(`Delete`)
 })
 
 export default router
