@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router()
-import { createProduct, getProducts, getProductById, updateProduct } from "./handlers/product";
+import { createProduct, getProducts, getProductById, updateProduct, updateStock } from "./handlers/product";
 import { body, param } from "express-validator";
 import { handleInputErros } from "./middleware";
 
@@ -22,9 +22,7 @@ router.put('/:id', body('name').notEmpty().withMessage('Name field can not be em
     body('stock').isNumeric().notEmpty().withMessage('Stock field can not be empty'),
     updateProduct)
 
-router.patch('/', (req, res) => {
-    res.json('patch')
-})
+router.patch('/:id', updateStock)
 
 router.delete('/', (req, res) => {
     res.json(`Delete`)
