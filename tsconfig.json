@@ -8,6 +8,7 @@
     "target": "ESNext",
     "moduleResolution": "nodenext",
     "module": "NodeNext",
+    "isolatedModules": true,
     "strict": false,
     "sourceMap": true,
     "esModuleInterop": true,

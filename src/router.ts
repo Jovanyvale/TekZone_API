@@ -1,6 +1,6 @@
 import { Router } from "express";
 const router = Router()
-import { createProduct, getProducts, getProductById, updateProduct, updateStock } from "./handlers/product";
+import { createProduct, getProducts, getProductById, updateProduct, updateStock, deleteProduct } from "./handlers/product";
 import { body, param } from "express-validator";
 import { handleInputErros } from "./middleware";
 
@@ -20,12 +20,16 @@ router.post('/', body('name').notEmpty().withMessage('Name field can not be empt
 router.put('/:id', body('name').notEmpty().withMessage('Name field can not be empty'),
     body('price').isNumeric().notEmpty().withMessage('Price field can not be empty'),
     body('stock').isNumeric().notEmpty().withMessage('Stock field can not be empty'),
+    handleInputErros,
     updateProduct)
 
-router.patch('/:id', updateStock)
+router.patch('/:id', param('id').isInt().withMessage('Not valid id'),
+    handleInputErros,
+    updateStock)
 
-router.delete('/', (req, res) => {
-    res.json(`Delete`)
-})
+router.delete('/:id', param('id').isInt().withMessage('Not valid id'),
+    handleInputErros,
+    deleteProduct
+)
 
 export default router

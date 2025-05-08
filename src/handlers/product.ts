@@ -1,7 +1,5 @@
 import { Request, Response } from "express"
 import Product from "../models/Product.model"
-import { UpdatedAt } from "sequelize-typescript"
-import { body } from "express-validator"
 
 export const getProducts = async (req: Request, res: Response) => {
     try {
@@ -76,5 +74,19 @@ export const updateStock = async (req: Request, res: Response) => {
     product.stock += 1
     await product.save()
 
+    res.json({ data: product })
+}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const product = await Product.findByPk(id)
+
+    if (!product) {
+        res.status(404).json({
+            error: 'Product not founded'
+        })
+    }
+
+    await product.destroy()
     res.json({ data: product })
 }
