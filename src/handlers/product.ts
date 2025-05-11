@@ -37,7 +37,7 @@ export const createProduct = async (req: Request, res: Response) => {
     try {
         const product = new Product(req.body)
         const savedProduct = await product.save()
-        res.json({ data: { savedProduct } })
+        res.status(201).json({ data: { savedProduct } })
     } catch (error) {
         console.log(error)
     }
