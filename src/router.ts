@@ -115,11 +115,140 @@ const router = Router()
  *               stock:
  *                 type: integer
  *                 example: 30
- *      responses:
- *          201:
- *              description: Product created successfully
- *          400:
- *              description: Bad request - Invalid data provided
+ *     responses:
+ *       201:
+ *         description: Product created successfully
+ *       400:
+ *         description: Bad request - Invalid data provided
+ */
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   put:
+ *     summary: Updates a product with the provided info
+ *     tags:
+ *       - Products
+ *     description: Return an updated product
+ *     parameters: 
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the product to update
+ *         schema:
+ *           type: integer
+ *     requestBody: 
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name: 
+ *                 type: string
+ *                 example: Laptop
+ *               price: 
+ *                 type: integer
+ *                 example: 700
+ *               description:
+ *                 type: string
+ *                 example: i5 12400f, RTX3060, 16GB RAM DDR4  
+ *               image:
+ *                 type: string
+ *                 example: images/image1.jpeg
+ *               stock:
+ *                 type: integer
+ *                 example: 30
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content: 
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: Product not found
+ */
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   patch:
+ *     summary: Update a product partially by ID
+ *     tags:
+ *       - Products
+ *     description: Update one or more fields of a product by its ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the product to update
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name: 
+ *                 type: string
+ *                 example: Laptop
+ *               price: 
+ *                 type: integer
+ *                 example: 700
+ *               description:
+ *                 type: string
+ *                 example: i5 12400f, RTX3060, 16GB RAM DDR4  
+ *               image:
+ *                 type: string
+ *                 example: images/image1.jpeg
+ *               stock:
+ *                 type: integer
+ *                 example: 30
+ *     responses:
+ *       200:
+ *         description: Product successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Product'
+ *       400:
+ *         description: Invalid input
+ *       404:
+ *         description: Product not found
+ */
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   delete:
+ *     summary: Delete a product from the data base
+ *     tags:
+ *       - Products
+ *     description: Delete a product by the provided id
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the product to update
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content: 
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               value: "Product Deleted"
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: Product not found
  */
 
 //Routing 
