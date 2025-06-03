@@ -1,4 +1,4 @@
-import colors from 'colors'
+import cors from "cors";
 import express from "express";
 import swaggerUI from "swagger-ui-express"
 import swaggerSpec from './config/swagger';
@@ -25,6 +25,8 @@ const server = express()
 //Read data
 server.use(express.json())
 
+
+server.use(cors({ origin: "http://localhost:3000" }));
 server.use('/api/products', router)
 
 //Docs
