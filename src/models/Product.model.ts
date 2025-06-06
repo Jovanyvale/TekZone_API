@@ -9,7 +9,7 @@ class Product extends Model {
     declare name: string
 
     @Column({
-        type: DataType.STRING(500)
+        type: DataType.STRING(2000)
     })
     declare description: string
 
@@ -19,7 +19,12 @@ class Product extends Model {
     declare price: number
 
     @Column({
-        type: DataType.STRING(100)
+        type: DataType.STRING(50)
+    })
+    declare category: string
+
+    @Column({
+        type: DataType.STRING(130)
     })
     declare image: string
 
