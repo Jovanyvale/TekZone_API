@@ -1,6 +1,7 @@
+import { timeStamp } from "node:console";
 import { Column, Table, Model, DataType } from "sequelize-typescript";
 
-@Table({ tableName: 'Products' })
+@Table({ tableName: 'Products', timestamps: false })
 
 class Product extends Model {
     @Column({

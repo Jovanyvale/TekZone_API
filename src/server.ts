@@ -10,7 +10,7 @@ import db from "./config/db";
 async function connectDB() {
     try {
         await db.authenticate()
-        await db.sync({ force: true })
+        await db.sync()
         // console.log(colors.green('Successful database connection'))
     } catch (error) {
         console.log(error)
