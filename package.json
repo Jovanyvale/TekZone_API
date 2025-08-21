@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles --coverage",
     "dev": "nodemon --exec \"ts-node\" src/index.ts",
-    "clearDB": "ts-node ./src/data/index.ts"
+    "clearDB": "ts-node ./src/data/index.ts",
+    "addProducts": "ts-node src/handlers/addProducts.ts"
   },
   "author": "Jovany Valenzuela",
   "license": "ISC",
