@@ -25,7 +25,7 @@ connectDB();
 const server = (0, express_1.default)();
 //Read data
 server.use(express_1.default.json());
-server.use((0, cors_1.default)({ origin: "https://tekzone-8wobzojzn-jovanyvales-projects.vercel.app" }));
+server.use((0, cors_1.default)({ origin: "https://tekzone-phi.vercel.app" }));
 server.use('/api/products', router_1.default);
 //Docs
 server.use('/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_1.default));

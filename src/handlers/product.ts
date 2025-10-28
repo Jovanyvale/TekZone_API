@@ -1,99 +1,92 @@
-import { Request, Response } from "express";
-import Product from "../models/Product.model";
+import { Request, Response } from "express"
+import Product from "../models/Product.model"
 
-// Obtener todos los productos
 export const getProducts = async (req: Request, res: Response) => {
     try {
-        console.log("Petición GET /api/products");
         const products = await Product.findAll({
-            order: [['id', 'ASC']],
+            order: [
+                ['id', 'ASC']
+            ],
             attributes: { exclude: ['createdAt', 'updatedAt'] }
-        });
-        console.log("Productos encontrados:", products.length);
-        return res.json({ data: products });
+        })
+        res.json({ data: products })
     } catch (error) {
-        console.error("Error en getProducts:", error);
-        return res.status(500).json({ error: 'Internal server error' });
+        console.log(error)
     }
-};
+}
 
-// Obtener producto por ID
 export const getProductById = async (req: Request, res: Response) => {
     try {
-        const { id } = req.params;
-        console.log(`Petición GET /api/products/${id}`);
-        const product = await Product.findByPk(id);
-        if (!product) return res.status(404).json({ error: 'Product not found' });
-        return res.json({ data: product });
-    } catch (error) {
-        console.error("Error en getProductById:", error);
-        return res.status(500).json({ error: 'Internal server error' });
-    }
-};
+        const { id } = req.params
+        const product = await Product.findByPk(id)
 
-// Crear producto
+        if (!product) {
+            res.status(404).json({
+                error: 'Product not founded'
+            })
+        }
+
+        res.json({ data: product })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
 export const createProduct = async (req: Request, res: Response) => {
     try {
-        console.log("Petición POST /api/products", req.body);
-        const product = new Product(req.body);
-        const savedProduct = await product.save();
-        console.log("Producto creado:", savedProduct.id);
-        return res.status(201).json({ data: savedProduct });
+        const product = new Product(req.body)
+        const savedProduct = await product.save()
+        res.status(201).json({ data: { savedProduct } })
     } catch (error) {
-        console.error("Error en createProduct:", error);
-        return res.status(500).json({ error: 'Internal server error' });
+        console.log(error)
     }
-};
 
-// Actualizar producto
+}
+
 export const updateProduct = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        console.log(`Petición PUT /api/products/${id}`, req.body);
-        const product = await Product.findByPk(id);
-        if (!product) return res.status(404).json({ error: 'Product not found' });
+    const { id } = req.params
+    const product = await Product.findByPk(id)
 
-        await product.update(req.body);
-        await product.save();
-        console.log("Producto actualizado:", product.id);
-        return res.json({ data: product });
-    } catch (error) {
-        console.error("Error en updateProduct:", error);
-        return res.status(500).json({ error: 'Internal server error' });
+    if (!product) {
+        res.status(404).json({
+            error: 'Product not founded'
+        })
     }
-};
 
-// Actualizar stock
+    //Update
+    await product.update(req.body)
+    await product.save()
+
+    res.json({ data: product })
+}
+
 export const updateStock = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        console.log(`Petición PATCH /api/products/${id}/stock`);
-        const product = await Product.findByPk(id);
-        if (!product) return res.status(404).json({ error: 'Product not found' });
+    const { id } = req.params
+    const product = await Product.findByPk(id)
 
-        product.stock += 1;
-        await product.save();
-        console.log("Stock actualizado para producto:", product.id);
-        return res.json({ data: product });
-    } catch (error) {
-        console.error("Error en updateStock:", error);
-        return res.status(500).json({ error: 'Internal server error' });
+    if (!product) {
+        res.status(404).json({
+            error: 'Product not founded'
+        })
     }
-};
 
-// Eliminar producto
+    product.stock += 1
+    await product.save()
+
+    res.json({ data: product })
+}
+
 export const deleteProduct = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params;
-        console.log(`Petición DELETE /api/products/${id}`);
-        const product = await Product.findByPk(id);
-        if (!product) return res.status(404).json({ error: 'Product not found' });
+    const { id } = req.params
+    const product = await Product.findByPk(id)
 
-        await product.destroy();
-        console.log("Producto eliminado:", product.id);
-        return res.json({ data: product });
-    } catch (error) {
-        console.error("Error en deleteProduct:", error);
-        return res.status(500).json({ error: 'Internal server error' });
+    if (!product) {
+        res.status(404).json({
+            error: 'Product not founded'
+        })
     }
-};
+
+    await product.destroy()
+    res.json({ data: product })
+}
