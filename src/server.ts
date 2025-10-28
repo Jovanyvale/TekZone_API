@@ -26,7 +26,7 @@ const server = express()
 server.use(express.json())
 
 
-server.use(cors({ origin: "http://localhost:3000" }));
+server.use(cors({ origin: "https://tekzone-8wobzojzn-jovanyvales-projects.vercel.app" }));
 server.use('/api/products', router)
 
 //Docs
