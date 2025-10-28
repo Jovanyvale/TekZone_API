@@ -8,7 +8,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const db = new sequelize_typescript_1.Sequelize(process.env.DATABASE_URL, {
     dialect: "postgres",
-    models: [__dirname + '/../models/**/*.ts'],
+    models: [__dirname + '/../models/**/*'],
     logging: false
 });
 exports.default = db;
