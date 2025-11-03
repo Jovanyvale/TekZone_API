@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Render API
-        run: curl -s https://tekzone-api-1.onrender.com > /dev/null
+        run: curl -s https://tekzone-api-1.onrender.com/api/products > /dev/null
